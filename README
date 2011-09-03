@@ -1,8 +1,9 @@
 These sketches rely on the ChipKit Basc IO Shield from Digilent:
-This shield is designed for the ChipKit so not all features will work with the shield used in a standard Arduino.
+http://www.digilentinc.com/Products/Detail.cfm?NavPath=2,719,935&Prod=CHIPKIT-BASIC-IO-SHIELD
 
-The libraries are from that web page. Extract the libraries into your:
-arduino/libraries folder or mpide/libraries folder.
+The libraries are from that web page. http://www.digilentinc.com/Data/Products/CHIPKIT-BASIC-IO-SHIELD/ChipKit%20IOShield%20Library.zip
+
+Extract the file then copy the libraries into your arduino/libraries folder or mpide/libraries folder.
 
 This shield is designed for the ChipKit so not all features will work with the shield used in a standard Arduino.
 
