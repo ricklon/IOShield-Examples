@@ -67,11 +67,8 @@ void setup()
 }
 
 void loop() 
- {
+{
     potVal = analogRead(potPin);
-        digitalWrite(LEDPins[ii], ledState);            
-    
-  }
-  
-  
+    digitalWrite(LEDPins[potVal], ledState);            
+      
 }

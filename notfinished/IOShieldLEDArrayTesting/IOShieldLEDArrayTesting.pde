@@ -27,19 +27,19 @@
 //*
 //*
 //************************************************************************
- */
+*/
 
 
 long previousMillis = 0;        // will store last time LED was updated
 long interval = 1000;           // interval at which to blink (milliseconds)
 int LEDPins[][1] = {
   {26, 0},
-  {27, 0}
-  {28, 0}
-  {29, 0}
-  {30, 0}
-  {31, 0}
-  {32, 0}
+  {27, 0},
+  {28, 0},
+  {29, 0},
+  {30, 0},
+  {31, 0},
+  {32, 0},
   {33, 0}
 };
 
@@ -51,7 +51,8 @@ void setup() {
   Serial.begin(9600);
   Serial.println("Setup: LEDTest");
   // set the LED pins as output:
-  for(int ii; ii < NUMLEDS; ii++) {
+  for(int ii; ii < NUMLEDS; ii++) 
+  {
     pinMode(LEDPins[ii][0], OUTPUT);    
     // set the LED with the ledState of the variable:
     digitalWrite(LEDPins[ii][0], HIGH);
@@ -69,19 +70,23 @@ void loop() {
   
    unsigned long currentMillis = millis();
  
-  if(currentMillis - previousMillis > interval) {
+  if(currentMillis - previousMillis > interval) 
+  {
     Serial.print("loop: state change: ");
     Serial.println(ledState);
     // save the last time you blinked the LED 
     previousMillis = currentMillis;   
        // if the LED is off turn it on and vice-versa:
-    if (ledState == LOW) {
+    if (ledState == LOW) 
+    {
       ledState = HIGH;
     }
-    else {
+    else 
+    {
       ledState = LOW;
     }
-    for (int ii; ii < NUMLEDS; ii++) {
+    for (int ii; ii < NUMLEDS; ii++) 
+    {
           digitalWrite(LEDPins[ii], ledState); 
      } 
   }
