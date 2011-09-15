@@ -219,7 +219,7 @@ void doPotTemp()
    IOShieldOled.updateDisplay();
   //q: With automatic update on, does it check if draw is needed or not? 
   //Turn automatic updating on
-  IOShieldOled.setCharUpdate(TRUE);
+  IOShieldOled.setCharUpdate(true);
   
    while(digitalRead(swts[3])) 
   { 

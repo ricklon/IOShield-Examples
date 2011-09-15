@@ -54,7 +54,7 @@ void loop()
 
   //q: With automatic update on, does it check if draw is needed or not? 
   //Turn automatic updating on
-  IOShieldOled.setCharUpdate(TRUE);
+  IOShieldOled.setCharUpdate(true);
   
   // Clear the virtual buffer
   // Doing this cause a lot of flicker for this sketch

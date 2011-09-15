@@ -26,9 +26,11 @@
 //*
 //************************************************************************
 */
+
 #include <IOShieldOled.h>
-#DEFINE height 128
-#DEFINE width 32
+
+#define height 128
+#define width 32
 
 void setup()
 {
