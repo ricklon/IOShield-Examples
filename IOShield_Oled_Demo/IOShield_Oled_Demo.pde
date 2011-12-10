@@ -1,6 +1,7 @@
 
-#include <IOShieldOled.h>
 #include <IOShieldTemp.h>
+#include <IOShieldOled.h>
+#include <Wire.h>
 
 void setup()
 {
@@ -8,7 +9,7 @@ void setup()
    Serial.println("Start");
     //Initialize Configuration register for onshot with 10 bit
   //resolution
-  IOShieldTemp.config(ONESHOT | RES10);
+  IOShieldTemp.config(IOSHIELDTEMP_ONESHOT | IOSHIELDTEMP_RES10);
   IOShieldOled.begin();
 }
 
@@ -20,7 +21,7 @@ void loop()
   char buff[16];
   char tempstr[32];
 
-  
+/*  
   //Get Temperature
   Serial.println("calling gettemp");
   IOShieldTemp.getTemp(temp);
@@ -37,7 +38,7 @@ void loop()
   
 Serial.print("temp: ");  
 Serial.println(tempstr);  
-
+*/
   //Clear the virtual buffer
   IOShieldOled.clearBuffer();
   

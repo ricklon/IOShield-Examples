@@ -26,8 +26,9 @@
 //*
 //************************************************************************
  */
-#include <IOShieldOled.h>
 #include <IOShieldTemp.h>
+#include <IOShieldOled.h>
+#include <Wire.h>
 
 long previousMillis = 0;        // will store last time LED was updated
 long interval = 50;           // interval at which to blink (milliseconds)
@@ -71,7 +72,7 @@ void setup() {
   Serial.println("LEDPins: done set as output");
   //Initialize Configuration register for onshot with 10 bit
   //resolution
-  IOShieldTemp.config(ONESHOT | RES10);
+  IOShieldTemp.config(IOSHIELDTEMP_ONESHOT | IOSHIELDTEMP_RES10);
   //Iniiialize IOShieldOled
   IOShieldOled.begin();
 }
@@ -210,7 +211,10 @@ void doBlinkHelloRowLED()
 void doPotTemp()
 {
 
-  uint8_t temp[2];
+  //- no longerneeded: uint8_t temp[2];
+  float tempC;
+  String tempCString;
+  char tempBuffer[16];
   char buff[16];
   char tempstr[32];
   int potVal;
@@ -230,7 +234,17 @@ void doPotTemp()
   IOShieldOled.setCursor(0, 0);
   IOShieldOled.putString("Temp:          ");
   IOShieldOled.setCursor(6, 0);
-  //Get Temperature
+  
+  //Get Temperature: orig
+  tempC = IOShieldTemp.getTemp();
+  tempCString = floatToString(tempC,DEC);
+  tempCString.toCharArray(tempBuffer,7);
+  IOShieldOled.putString(tempBuffer);
+  IOShieldOled.putString(" C");
+  
+  
+  //Get Temperature: orig
+  /* Function no longer defined
   IOShieldTemp.getTemp(temp); 
   itoa((int)temp[0], buff,10);
   strcpy(tempstr, buff);
@@ -239,7 +253,9 @@ void doPotTemp()
   strcat(tempstr, buff);
   // Spaces after the C blank the not clear characters
   strcat(tempstr," C");
-  IOShieldOled.putString(tempstr);
+  //IOShieldOled.putString(tempstr);
+   IOShieldOled.putString(tempC);
+   */
     
   //Get Potentiomter value
   potVal = analogRead(potPin);
@@ -276,6 +292,44 @@ void demo()
   
 }
 
+
+
+String floatToString(double number, uint8_t digits) 
+{ 
+  String resultString = "";
+  // Handle negative numbers
+  if (number < 0.0)
+  {
+     resultString += "-";
+     number = -number;
+  }
+
+  // Round correctly so that print(1.999, 2) prints as "2.00"
+  double rounding = 0.5;
+  for (uint8_t i=0; i<digits; ++i)
+    rounding /= 10.0;
+  
+  number += rounding;
+
+  // Extract the integer part of the number and print it
+  unsigned long int_part = (unsigned long)number;
+  double remainder = number - (double)int_part;
+  resultString += int_part;
+
+  // Print the decimal point, but only if there are digits beyond
+  if (digits > 0)
+    resultString += "."; 
+
+  // Extract digits from the remainder one at a time
+  while (digits-- > 0)
+  {
+    remainder *= 10.0;
+    int toPrint = int(remainder);
+    resultString += toPrint;
+    remainder -= toPrint; 
+  } 
+  return resultString;
+}
 
 
 
